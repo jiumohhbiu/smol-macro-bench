@@ -1,0 +1,1 @@
+# smol-macro-bench
