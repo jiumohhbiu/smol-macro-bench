@@ -1,0 +1,22 @@
+set terminal svg size 1600, 900
+set output '2dplot.svg'
+
+set xlabel "Name length"
+set ylabel "Collection size"
+set zlabel "Ticks"
+set grid
+
+set autoscale z
+
+set view 60, 30, 1, 1
+
+set parametric
+
+# Plot
+splot 'preproc_data/dual_axis/c_fprintf TTR=100000000 OPTIMIZATION=2 TIMER=__rdtsc.h.dat' with lines lc rgb "red" title "fprintf", \
+      'preproc_data/dual_axis/c_snprintf TTR=100000000 OPTIMIZATION=2 TIMER=__rdtsc.h.dat' with lines lc rgb "green" title "snprintf", \
+      'preproc_data/dual_axis/c_snprintf_fprintf TTR=100000000 OPTIMIZATION=2 TIMER=__rdtsc.h.dat' with lines lc rgb "blue" title "snprintf fprintf"
+
+set terminal pngcairo enhanced size 3840, 2160
+set output '4K ULTRA HD GRAPHIUM.png'
+replot

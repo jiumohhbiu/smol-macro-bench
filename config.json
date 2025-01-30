@@ -1,0 +1,118 @@
+{
+    "var": {
+        "default_repr": "{KEY}={VALUE}",
+        "gcc_macro_repr": "-D{KEY}={VALUE}",
+        "NAME_SIZE": "!seq 1 1 25 !exp_seq 26 1.05 1000",
+        "ITEMS_SIZE": "15",
+        "TTR": "10000000",
+        "OPTIMIZATION": "2",
+        "target_executable": "app.exe",
+
+        "c_makefile": "c_makefile",
+
+        "c_tsc": "src/__rdtsc.c inc/__rdtsc.h",
+
+        "c_main_fprintf": "src/main_fprintf.c",
+        "c_item_fprintf": "src/item_fprintf.c src/item_fprintf.h",
+        "c_main_snprintf": "src/main_snprintf.c",
+        "c_item_snprintf": "src/item_snprintf.c src/item_snprintf.h",
+        "c_main_snprintf_fprintf": "src/main_snprintf_fprintf.c",
+
+        "c_builder": "build_c.py",
+
+        "halt_on": "0.01",
+
+        "processing": {
+            "dual_axis": {
+                "realizations": "c_fprintf c_snprintf c_snprintf_fprintf",
+                "x_axis": "NAME_SIZE",
+                "filter_options_value": {
+                },
+                "markers": "percentile_5 percentile_25 median percentile_75 percentile_95"
+            }
+        }
+    },
+    "realizations": {
+        "c_fprintf": {
+            "files": "!var c_main_fprintf !var c_item_fprintf !var c_tsc !var c_builder !var c_makefile",
+            "target": "!var target_executable",
+            "options": {
+                "NAME_SIZE": {
+                    "values": "!var NAME_SIZE",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "ITEMS_SIZE": {
+                    "values": "!var ITEMS_SIZE",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "TTR": {
+                    "values": "!var TTR",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "OPTIMIZATION": {
+                    "values": "!var OPTIMIZATION",
+                    "repr": "-O{VALUE}"
+                },
+                "TIMER": {
+                    "values": "__rdtsc.h",
+                    "repr": "!var gcc_macro_repr"
+                }
+            },
+            "build_exec": "!var c_builder"
+        },
+        "c_snprintf": {
+            "files": "!var c_main_snprintf !var c_item_snprintf !var c_tsc !var c_builder !var c_makefile",
+            "target": "!var target_executable",
+            "options": {
+                "NAME_SIZE": {
+                    "values": "!var NAME_SIZE",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "ITEMS_SIZE": {
+                    "values": "!var ITEMS_SIZE",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "TTR": {
+                    "values": "!var TTR",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "OPTIMIZATION": {
+                    "values": "!var OPTIMIZATION",
+                    "repr": "-O{VALUE}"
+                },
+                "TIMER": {
+                    "values": "__rdtsc.h",
+                    "repr": "!var gcc_macro_repr"
+                }
+            },
+            "build_exec": "!var c_builder"
+        },
+        "c_snprintf_fprintf": {
+            "files": "!var c_main_snprintf_fprintf !var c_item_snprintf !var c_tsc !var c_builder !var c_makefile",
+            "target": "!var target_executable",
+            "options": {
+                "NAME_SIZE": {
+                    "values": "!var NAME_SIZE",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "ITEMS_SIZE": {
+                    "values": "!var ITEMS_SIZE",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "TTR": {
+                    "values": "!var TTR",
+                    "repr": "!var gcc_macro_repr"
+                },
+                "OPTIMIZATION": {
+                    "values": "!var OPTIMIZATION",
+                    "repr": "-O{VALUE}"
+                },
+                "TIMER": {
+                    "values": "__rdtsc.h",
+                    "repr": "!var gcc_macro_repr"
+                }
+            },
+            "build_exec": "!var c_builder"
+        }
+    }
+}

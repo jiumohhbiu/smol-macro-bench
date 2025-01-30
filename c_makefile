@@ -1,0 +1,21 @@
+ifndef VERBOSE
+.SILENT:
+endif
+
+CC = gcc
+CFLAGS = -std=gnu99
+INCLUDES = -Iinc -Iinclude
+LFLAGS = 
+LIBS = 
+SRCS = 
+SPECIFIC_FLAGS = 
+
+
+$(TARGET): $(SRCS)
+	$(CC) -o '$(TARGET)' $(CFLAGS) $(SPECIFIC_FLAGS) $(INCLUDES) $(SRCS) $(LFLAGS) $(LIBS)
+
+
+clean:
+	rm *.exe
+
+.PHONY: clean
